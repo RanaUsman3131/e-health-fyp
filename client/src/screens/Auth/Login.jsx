@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import styled from "styled-components";
-import Footer from "../../components/Footer";
+
 import { useHistory } from "react-router";
 import "./loginStyles.css";
 
@@ -44,7 +44,8 @@ const AuthCard = styled.div`
 const ImageSide = styled.div`
   width: 40%;
   position: relative;
-  background-color: #145388;
+  background-image: linear-gradient(
+75deg, #ad1cc7,#8d1cc7) !important;
   padding: 80px 40px;
 
   @media (max-width: 575px) {
@@ -70,12 +71,14 @@ const FormSide = styled.div`
 `;
 const LogoSingle = styled.span`
   width: 100%;
-  height: 150px;
-  background: url(http://compliancecabinet.com/assets/img/Logo_Transparent.png)
-    no-repeat;
+  height: 100px;
+  text-align:center;
+  // background: url(http://compliancecabinet.com/assets/img/Logo_Transparent.png)
+  //   no-repeat;
   background-position: 50%;
   display: block;
   margin: 0 auto;
+  color:black;
   background-size: contain;
   @media (max-width: 575px) {
     margin-bottom: 20px;
@@ -169,16 +172,18 @@ export default function Login() {
               <AuthCard className="card">
                 <ImageSide>
                   <p className="text-white h2">
-                    Total Compliance Service Provider
+                    Be Strong And Healthy
                   </p>
                   <p className="text-white mb-0">
                     Please use your credentials to login.<br></br>
                   </p>
                 </ImageSide>
                 <FormSide>
-                  <a aria-current="page" className="text-white active" href="/">
-                    <LogoSingle></LogoSingle>
-                  </a>
+                    <a aria-current="page" className="text-white active" href="/">
+                      <LogoSingle>
+                      <h1>E-Health Care</h1>
+                      </LogoSingle>
+                    </a>
                   <CardTitle className="mb-4">Login</CardTitle>
                   <form className="">
                     <FloatLabel className="form-group mb-4">
@@ -203,6 +208,7 @@ export default function Login() {
                     </FloatLabel>
                     <div className="d-flex justify-content-between align-items-center">
                       <a href="/forgot-password">Forgot password?</a>
+                     
                       <button
                         onClick={() => {
                           history.push("/home/dashboard");
@@ -213,13 +219,18 @@ export default function Login() {
                         LOGIN
                       </button>
                     </div>
+                    <div className="d-flex justify-content-center mt-3  align-items-center">
+                      <a href="/auth/register" className="btn-signUp">Not Have an account? Sign Up</a>
+
+                    
+                    </div>
                     <br></br>
                   </form>
                 </FormSide>
               </AuthCard>
             </div>
           </div>
-          <Footer></Footer>
+        
         </div>
       </Main>
     </Fragment>

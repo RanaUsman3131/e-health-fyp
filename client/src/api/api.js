@@ -1,4 +1,8 @@
 import instance from "./axiosConfig";
+export async function roles() {
+  let { data } = await instance.get('/auth/roles');
+  return data;
+}
 
 export async function LLCManagement() {
   let { data } = await instance.get("/llc_managements");

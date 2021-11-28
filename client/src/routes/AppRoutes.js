@@ -3,6 +3,8 @@ import { Route, useRouteMatch } from "react-router-dom";
 const Dashboard = React.lazy(() => import("../screens/Dashboard"));
 const Client = React.lazy(() => import("../screens/Client/Client"));
 const Contact = React.lazy(() => import("../screens/Contact/Contact"));
+
+
 export default function AppRoutes() {
   let { path } = useRouteMatch();
 

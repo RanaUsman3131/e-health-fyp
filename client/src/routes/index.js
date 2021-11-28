@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router";
 import AuthRoutes from "./AuthRoutes";
 import Main from "../screens/Main";
-
+import Home from "../screens/Home/Home";
 export default function Index() {
   return (
     <>
@@ -10,8 +10,11 @@ export default function Index() {
         <Route path="/auth">
           <AuthRoutes />
         </Route>
-        <Route path="/">
+        <Route path="/" exact>
           <Main />
+        </Route>
+        <Route path="/home" >
+          <Home />
         </Route>
         {/* <Route path="*">
           {() => {
