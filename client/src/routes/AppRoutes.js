@@ -1,8 +1,8 @@
 import React from "react";
-import { Route, useRouteMatch } from "react-router-dom";
+import { Route, useRouteMatch, Switch } from "react-router-dom";
 const Dashboard = React.lazy(() => import("../screens/Dashboard"));
-const Client = React.lazy(() => import("../screens/Client/Client"));
-const Contact = React.lazy(() => import("../screens/Contact/Contact"));
+const PatientRoutes = React.lazy(() => import("./PatientRoutes"));
+const AppointmentRoutes = React.lazy(() => import("./AppointmentRoutes"));
 
 
 export default function AppRoutes() {
@@ -10,9 +10,14 @@ export default function AppRoutes() {
 
   return (
     <>
-      <Route path={`${path}dashboard`} component={Dashboard} />
-      <Route path={`${path}clients`} component={Client} />
-      <Route path={`${path}contacts`} component={Contact} />
+      <React.Suspense fallback={"Loading"}>
+      <Switch>
+          <Route path={`${path}/dashboard`} component={Dashboard} />
+          <Route path={`${path}/patient`} component={PatientRoutes} />
+          <Route path={`${path}/appointment`} component={AppointmentRoutes} />
+      </Switch>
+    </React.Suspense>
+    
     </>
   );
 }

@@ -1,16 +1,19 @@
-import React from "react";
-import { Route, useRouteMatch } from "react-router-dom";
 
-const Login = React.lazy(() => import("../screens/Auth/Login"));
-const Register = React.lazy(() => import("../screens/Auth/Register"));
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-export default function AuthRoutes() {
-  let { path } = useRouteMatch();
-  return (
-    <>
-      <Route path={`${path}/login`} component={Login} />
-      <Route path={`${path}/register`} component={Register} />
+const AuthRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      !localStorage.getItem('accessToken') ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/portal" />
+      )
+    }
+  />
+);
 
-    </>
-  );
-}
+export default AuthRoute;
+

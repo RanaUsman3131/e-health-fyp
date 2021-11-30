@@ -143,11 +143,12 @@ export default function Index() {
               <i className="fas fa-bars"></i>
             </MenuIcon>
             <BrandLogo>
-              <img
+            <h2>E-Health Care</h2>
+              {/* <img
                 style={{ width: "100%", height: "auto" }}
                 src={Logo}
                 alt={"logo "}
-              />
+              /> */}
             </BrandLogo>
 
             <ProfileIcon>
@@ -162,11 +163,11 @@ export default function Index() {
 
                 <Dropdown.Menu align={"start"}>
                   <Dropdown.Item className={"py-2"} href="#/action-2">
-                    <DropDownLink>Account</DropDownLink>
+                    <DropDownLink>Profile</DropDownLink>
                   </Dropdown.Item>
-                  <Dropdown.Item className={"py-2"} href="#/action-3">
+                  {/* <Dropdown.Item className={"py-2"} href="#/action-3">
                     <DropDownLink>What's New</DropDownLink>
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                   <Dropdown.Divider />
                   <Dropdown.Item className={"py-2"}>
                     <DropDownLink>

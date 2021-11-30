@@ -27,20 +27,26 @@ const list = [
   {
     id: 1,
     name: "Dashboard",
-    link: "/dashboard",
+    link: "/portal/dashboard",
     iconClass: "fas fa-home",
   },
   {
     id: 1,
-    name: "Clients",
-    link: "/clients",
+    name: "Appointments",
+    link: "/portal/appointment",
     iconClass: "fas fa-user-friends",
   },
   {
     id: 1,
-    name: "Contacts",
-    link: "/contacts",
+    name: "Patients",
+    link: "/portal/patient",
     iconClass: "far fa-address-book",
+  },
+  {
+    id: 1,
+    name: "Setting",
+    link: "/setting",
+  iconClass: "fas fa-cogs",
   },
 ];
 
