@@ -2,37 +2,50 @@ import React from "react";
 import Table from "../../components/Table";
 import Container from "react-bootstrap/Container";
 import Title from "../../components/PageTitle";
-import { getClients } from "../../api/api";
+import { getContacts } from "../../api/api";
 import { useQuery } from "react-query";
+import { Link, useRouteMatch } from "react-router-dom";
 
 export default function List() {
-    const clientData = useQuery("getClients", getClients);
+    let { url } = useRouteMatch();
+    const contactData = useQuery("getContacts", getContacts);
+    console.log(contactData);
     const columns = React.useMemo(
         () => [
+          
             {
-                Header: "Flag",
-                accessor: "x", // accessor is the "key" in the data
+                Header: "Name",
+                accessor: "ma,e",
+                // Cell: ({ row }) => {
+                //     return (
+                //         <Link to={`${url + "/details/" + row.original._id}/detail`}>
+                //             {row.original.fullName}
+                //         </Link>
+                //     );
+                // },
             },
             {
-                Header: "Client Name",
-                accessor: "entityName",
+                Header: "Department",
+                accessor: "department",
             },
             {
-                Header: "Phone",
-                accessor: "phone",
+                Header: "Disease",
+                accessor: "disease",
             },
+            
+            
             {
-                Header: "Website",
-                accessor: "website",
+                Header: "Cell Phone",
+                accessor: "cellPhone",
             },
         ],
         []
     );
-    const data = React.useMemo(() => clientData.data || [], [clientData.data]);
+    const data = React.useMemo(() => contactData.data || [], [contactData.data]);
     return (
         <>
             <Container>
-                <Title btnText="Add new" link="/clients/add" title="Patient" />
+                <Title btnText="Add new" link="/portal/patient/Add" title="Patients" />
                 <Table columns={columns} data={data} />
             </Container>
         </>

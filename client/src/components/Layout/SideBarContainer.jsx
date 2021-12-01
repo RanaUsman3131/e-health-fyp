@@ -39,7 +39,7 @@ const list = [
   {
     id: 1,
     name: "Patients",
-    link: "/portal/patient",
+    link: "/portal/patient/List",
     iconClass: "far fa-address-book",
   },
   {
