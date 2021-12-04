@@ -1,8 +1,8 @@
 import React from "react";
-import Table from "../../components/Table";
+import Table from "../../../components/Table";
 import Container from "react-bootstrap/Container";
-import Title from "../../components/PageTitle";
-import { getClients } from "../../api/api";
+import Title from "../../../components/PageTitle";
+import { getClients } from "../../../api/api";
 import { useQuery } from "react-query";
 
 export default function List() {
@@ -36,7 +36,7 @@ export default function List() {
     return (
         <>
             <Container>
-                <Title  title="Appointments" />
+                <Title title="Appointments" />
                 <Table columns={columns} data={data} />
             </Container>
         </>

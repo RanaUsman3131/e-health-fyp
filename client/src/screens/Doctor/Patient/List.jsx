@@ -1,8 +1,8 @@
 import React from "react";
-import Table from "../../components/Table";
+import Table from "../../../components/Table";
 import Container from "react-bootstrap/Container";
-import Title from "../../components/PageTitle";
-import { getContacts } from "../../api/api";
+import Title from "../../../components/PageTitle";
+import { getContacts } from "../../../api/api";
 import { useQuery } from "react-query";
 import { Link, useRouteMatch } from "react-router-dom";
 

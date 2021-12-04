@@ -42,32 +42,22 @@ const list = [
     link: "/portal/patient/List",
     iconClass: "far fa-address-book",
   },
-  {
-    id: 1,
-    name: "Setting",
-    link: "/setting",
-  iconClass: "fas fa-cogs",
-  },
+ 
 ]; 
 const patientRoutes = [
   {
     id: 1,
     name: "Dashboard",
-    link: "/portal/patient/dashboard",
+    link: "/portal/patient_dashboard",
     iconClass: "fas fa-home",
   },
   {
     id: 1,
     name: "Appointments",
-    link: "/portal/patient/appointment",
+    link: "/portal/patient_appointment",
     iconClass: "fas fa-user-friends",
   },
-  {
-    id: 1,
-    name: "Patients",
-    link: "/portal/patient/List",
-    iconClass: "far fa-address-book",
-  },
+
   {
     id: 1,
     name: "Setting",
@@ -85,14 +75,14 @@ export default function SideBarContainer() {
             
             {
              
-              JSON.parse(localStorage.getItem('user_auth'))?.role_id === 1?
+              // JSON.parse(localStorage.getItem('user_auth'))?.role_id === 1?
                 patientRoutes.map((item, index) => (
                   <NavItem item={item} key={index}></NavItem>
             ))
-            : 
-                    list.map((item, index) => (
-            <NavItem item={item} key={index}></NavItem>
-            ))
+            // : 
+            //         list.map((item, index) => (
+            // <NavItem item={item} key={index}></NavItem>
+            // ))
             }
           </Ul>
         </SidebarList>

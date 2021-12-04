@@ -1,11 +1,11 @@
 import React from "react";
-import Card from "../components/Card/index"
+import Card from "../../components/Card/index"
 import Box from '@mui/material/Box';
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-export default function Dashboard() {
+export default function PatientDashboard() {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -14,7 +14,7 @@ export default function Dashboard() {
           <Grid item xs={4}>
             <Card className="d-flex">
               <Typography sx={{ fontSize: 16 }} variant="body1" color="text.secondary" gutterBottom>
-                Total Patients
+                Pending Appointments
               </Typography>
           
             </Card>
@@ -27,14 +27,7 @@ export default function Dashboard() {
 
             </Card>
           </Grid>
-          <Grid item xs={4}>
-            <Card className="d-flex">
-              <Typography sx={{ fontSize: 16 }} variant="body2" color="text.secondary" gutterBottom>
-                Total Departments
-              </Typography>
-
-            </Card>
-          </Grid>
+         
   
         
         </Grid>

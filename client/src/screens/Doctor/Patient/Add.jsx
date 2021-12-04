@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
-import Title from "../../components/PageTitle";
-import Index from "../../components/PatientForm";
+import Title from "../../../components/PageTitle";
+import Index from "../../../components/PatientForm";
 
 export default function Add() {
     return (

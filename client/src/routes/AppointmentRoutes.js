@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 
-const List = React.lazy(() => import("../screens/Appointment/List"));
-const Add = React.lazy(() => import("../screens/Client/Add"));
+const List = React.lazy(() => import("../screens/Doctor/Appointment/List"));
+const Add = React.lazy(() => import("../screens/Doctor/Appointment/Add"));
 
 export default function AppointmentRoutes() {
     let { path } = useRouteMatch();
