@@ -185,6 +185,7 @@ export default function Login() {
     onSubmit: (values) => {
       console.log("🚀 ~ file: Login.jsx ~ line 185 ~ Login ~ values", values);
       login(values).then((res) => {
+        localStorage.setItem("user_auth", JSON.stringify(res.data.data));
         history.push("/portal/");
       });
     },
