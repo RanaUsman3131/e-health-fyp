@@ -187,7 +187,7 @@ export default function Register() {
     register(data)
       .then((res) => {
         console.log(res);
-        history.push('/login')
+        // history.push('/login')
       });
   }
   return (

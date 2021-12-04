@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { useHistory } from "react-router";
 import "./loginStyles.css";
+import { login } from '../../api/api'
 
 const Main = styled.main`
   margin-left: 0 !important;
@@ -162,6 +163,14 @@ const FloatLabel = styled.label`
 `;
 export default function Login() {
   const history = useHistory();
+  const onSubmit = (data) => {
+    console.log(data)
+    login(data)
+      .then((res) => {
+        console.log(res);
+        // history.push('/login')
+      });
+  }
   return (
     <Fragment>
       <div className="fixed-background"></div>
@@ -185,7 +194,7 @@ export default function Login() {
                       </LogoSingle>
                     </a>
                   <CardTitle className="mb-4">Login</CardTitle>
-                  <form className="">
+                  <form onSubmit={onSubmit}>
                     <FloatLabel className="form-group mb-4">
                       <input
                         name="email"
@@ -208,10 +217,8 @@ export default function Login() {
                       <a href="/forgot-password">Forgot password?</a>
                      
                       <button
-                        onClick={() => {
-                          history.push("/home/dashboard");
-                        }}
-                        type="button"
+                     
+                        type="submit"
                         className="btn-shadow btn btn-primary btn-lg"
                       >
                         LOGIN
