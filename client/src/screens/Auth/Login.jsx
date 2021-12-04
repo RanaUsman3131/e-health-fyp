@@ -3,6 +3,10 @@ import styled from "styled-components";
 
 import { useHistory } from "react-router";
 import "./loginStyles.css";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Input from "../../components/Input";
+import { login } from "../../api/api";
 
 const Main = styled.main`
   margin-left: 0 !important;
@@ -44,8 +48,7 @@ const AuthCard = styled.div`
 const ImageSide = styled.div`
   width: 40%;
   position: relative;
-  background-image: linear-gradient(
-75deg, #ad1cc7,#8d1cc7) !important;
+  background-image: linear-gradient(75deg, #ad1cc7, #8d1cc7) !important;
   padding: 80px 40px;
 
   @media (max-width: 575px) {
@@ -72,13 +75,13 @@ const FormSide = styled.div`
 const LogoSingle = styled.span`
   width: 100%;
   height: 100px;
-  text-align:center;
+  text-align: center;
   // background: url(http://compliancecabinet.com/assets/img/Logo_Transparent.png)
   //   no-repeat;
   background-position: 50%;
   display: block;
   margin: 0 auto;
-  color:black;
+  color: black;
   background-size: contain;
   @media (max-width: 575px) {
     margin-bottom: 20px;
@@ -160,8 +163,33 @@ const FloatLabel = styled.label`
     opacity: 0;
   }
 `;
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Email Must be Valid email")
+    .required("Email Is Reqiured"),
+  password: Yup.string().required("Password is required"),
+});
+
+const initialValues = {
+  email: "",
+  password: "",
+};
+
 export default function Login() {
   const history = useHistory();
+
+  const formik = useFormik({
+    initialValues: initialValues,
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      console.log("🚀 ~ file: Login.jsx ~ line 185 ~ Login ~ values", values);
+      login(values).then((res) => {
+        history.push("/portal/");
+      });
+    },
+  });
+
   return (
     <Fragment>
       <div className="fixed-background"></div>
@@ -171,56 +199,63 @@ export default function Login() {
             <div className="mx-auto my-auto col-12 col-md-10">
               <AuthCard className="card">
                 <ImageSide>
-                  <p className="text-white h2">
-                    Be Strong And Healthy
-                  </p>
+                  <p className="text-white h2">Be Strong And Healthy</p>
                   <p className="text-white mb-0">
                     Please use your credentials to login.<br></br>
                   </p>
                 </ImageSide>
                 <FormSide>
-                    <a aria-current="page" className="text-white active" href="/">
-                      <LogoSingle>
+                  <a aria-current="page" className="text-white active" href="/">
+                    <LogoSingle>
                       <h1>E-Health Care</h1>
-                      </LogoSingle>
-                    </a>
+                    </LogoSingle>
+                  </a>
                   <CardTitle className="mb-4">Login</CardTitle>
-                  <form className="">
+                  <form onSubmit={formik.handleSubmit}>
                     <FloatLabel className="form-group mb-4">
-                      <input
+                      <Input
+                        label="Email"
+                        required
                         name="email"
-                        placeholder="email"
-                        type="text"
-                        className="form-control"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                        error={
+                          formik.touched.email && formik.errors.email
+                            ? formik.errors.email
+                            : null
+                        }
                       />
-                      <span>E-mail</span>
                     </FloatLabel>
                     <FloatLabel className="form-group mb-4">
-                      <input
+                      <Input
+                        label="Password"
+                        required
                         name="password"
-                        placeholder="password"
-                        type="password"
-                        className="form-control"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                        error={
+                          formik.touched.password && formik.errors.password
+                            ? formik.errors.password
+                            : null
+                        }
                       />
-                      <span>Password</span>
                     </FloatLabel>
                     <div className="d-flex justify-content-between align-items-center">
                       <a href="/forgot-password">Forgot password?</a>
-                     
+
                       <button
-                        onClick={() => {
-                          history.push("/home/dashboard");
-                        }}
-                        type="button"
+                        type="submit"
                         className="btn-shadow btn btn-primary btn-lg"
                       >
                         LOGIN
                       </button>
                     </div>
                     <div className="d-flex justify-content-center mt-3  align-items-center">
-                      <a href="/register" className="btn-signUp">Not Have an account? Sign Up</a>
-
-                    
+                      <a href="/register" className="btn-signUp">
+                        Not Have an account? Sign Up
+                      </a>
                     </div>
                     <br></br>
                   </form>
@@ -228,7 +263,6 @@ export default function Login() {
               </AuthCard>
             </div>
           </div>
-        
         </div>
       </Main>
     </Fragment>

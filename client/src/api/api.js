@@ -1,18 +1,22 @@
 import instance from "./axiosConfig";
 export async function roles() {
-  let { data } = await instance.get('/auth/roles');
+  let { data } = await instance.get("/auth/roles");
+  return data;
+}
+
+export async function login(_data) {
+  let { data } = await instance.post("/auth/login", _data);
   return data;
 }
 export async function register({ name, email, password, role_id }) {
-  let { data } = await instance.post('/auth/register', { name, email, password, role_id });
+  let { data } = await instance.post("/auth/register", {
+    name,
+    email,
+    password,
+    role_id,
+  });
   return data;
-
 }
-
-
-
-
-
 
 // //////////////////////
 export async function LLCManagement() {
