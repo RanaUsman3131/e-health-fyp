@@ -85,12 +85,13 @@ export default function SideBarContainer() {
             
             {
              
-            JSON.parse(localStorage.getItem('user_auth')).role_id == 1?
-            list.map((item, index) => (
-              <NavItem item={item} key={index}></NavItem>
-            ))
-            : patientRoutes.map((item, index) => (
+              JSON.parse(localStorage.getItem('user_auth'))?.role_id === 1?
+                patientRoutes.map((item, index) => (
                   <NavItem item={item} key={index}></NavItem>
+            ))
+            : 
+                    list.map((item, index) => (
+            <NavItem item={item} key={index}></NavItem>
             ))
             }
           </Ul>

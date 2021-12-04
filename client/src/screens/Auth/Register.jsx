@@ -207,6 +207,19 @@ export default function Register() {
       .catch((err) => {});
   };
 
+<<<<<<< HEAD
+=======
+      })
+  }
+  const onSubmit = (data) => {
+    console.log(data)
+    register(data)
+      .then((res) => {
+        console.log(res);
+        // history.push('/login')
+      });
+  }
+>>>>>>> 2ba17220bdab2c57fce5eaed9ce023ef2da6d33e
   return (
     <Fragment>
       <div className="fixed-background"></div>

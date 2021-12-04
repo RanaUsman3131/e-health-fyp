@@ -4,18 +4,16 @@ export async function roles() {
   return data;
 }
 
-export async function login(_data) {
-  let { data } = await instance.post("/auth/login", _data);
-  return data;
+export async function login({ email, password }) {
+  return await instance.post("/auth/login", { email, password });
 }
 export async function register({ name, email, password, role_id }) {
-  let { data } = await instance.post("/auth/register", {
+  return await instance.post("/auth/register", {
     name,
     email,
     password,
     role_id,
   });
-  return data;
 }
 
 // //////////////////////
