@@ -3,6 +3,7 @@ import { Route, useRouteMatch, Switch } from "react-router-dom";
 const Dashboard = React.lazy(() => import("../screens/Dashboard"));
 const PatientRoutes = React.lazy(() => import("./PatientRoutes"));
 const AppointmentRoutes = React.lazy(() => import("./AppointmentRoutes"));
+const DoctorRoutes = React.lazy(() => import("./DoctorRoutes"));
 
 
 export default function AppRoutes() {
@@ -14,6 +15,8 @@ export default function AppRoutes() {
       <Switch>
           <Route path={`${path}/dashboard`} component={Dashboard} />
           <Route path={`${path}/patient`} component={PatientRoutes} />
+          <Route path={`${path}/doctor`} component={DoctorRoutes} />
+
           <Route path={`${path}/appointment`} component={AppointmentRoutes} />
       </Switch>
     </React.Suspense>

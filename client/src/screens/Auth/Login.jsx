@@ -192,7 +192,6 @@ export default function Login() {
                         placeholder="email"
                         type="text"
                         className="form-control"
-                        value=""
                       />
                       <span>E-mail</span>
                     </FloatLabel>
@@ -202,7 +201,6 @@ export default function Login() {
                         placeholder="password"
                         type="password"
                         className="form-control"
-                        value=""
                       />
                       <span>Password</span>
                     </FloatLabel>
@@ -220,7 +218,7 @@ export default function Login() {
                       </button>
                     </div>
                     <div className="d-flex justify-content-center mt-3  align-items-center">
-                      <a href="/auth/register" className="btn-signUp">Not Have an account? Sign Up</a>
+                      <a href="/register" className="btn-signUp">Not Have an account? Sign Up</a>
 
                     
                     </div>

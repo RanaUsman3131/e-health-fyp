@@ -223,7 +223,7 @@ export default function Register() {
                         placeholder="email"
                         type="text"
                         className="form-control"
-                        value=""
+                        
                       />
                       <span>E-mail</span>
                     </FloatLabel>
@@ -234,7 +234,7 @@ export default function Register() {
                         placeholder="password"
                         type="password"
                         className="form-control"
-                        value=""
+                       
                       />
                       <span>Password</span>
                     </FloatLabel>
@@ -244,7 +244,7 @@ export default function Register() {
                         placeholder="confirm password"
                         type="password"
                         className="form-control"
-                        value=""
+                       
                       />
                       <span>Confirm Password</span>
                     </FloatLabel>

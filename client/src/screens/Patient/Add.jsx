@@ -1,18 +1,18 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Title from "../../components/PageTitle";
-import Form from "../../components/ContactForm";
+import Index from "../../components/PatientForm";
 
 export default function Add() {
     return (
         <>
             <Container>
                 <Title
-                    backlink="/contacts"
-                    backPageText="Contacts"
-                    title="Add Contact"
+                    backlink="/portal/patient/List"
+                    backPageText="Patients"
+                    title=" Create Appointment"
                 />
-                <Form />
+                <Index />
             </Container>
         </>
     );
