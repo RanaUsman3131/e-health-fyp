@@ -167,19 +167,26 @@ const FloatLabel = styled.label`
 `;
 
 const validationSchema = Yup.object({
+  name: Yup.string().required("Name Is Reqiured"),
   email: Yup.string()
     .email("Email Must be Valid email")
     .required("Email Is Reqiured"),
-  password: Yup.string("Password is required"),
+  password: Yup.string().required("Password is required"),
+  role_id: Yup.object().shape({
+    _id: Yup.string().required("Role is required"),
+  }),
 });
 
 const initialValues = {
+  name: "",
   email: "",
-  passsword: "",
+  password: "",
+  role_id: "",
 };
 
 export default function Register() {
   const history = useHistory();
+  const [role, setRoles] = useState([]);
 
   const formik = useFormik({
     initialValues: initialValues,
@@ -188,7 +195,7 @@ export default function Register() {
       console.log("🚀 ~ file: Login.jsx ~ line 185 ~ Login ~ values", values);
       register(values).then((res) => {
         console.log(res);
-        history.push("/login");
+        //history.push("/login");
       });
     },
   });
@@ -196,30 +203,17 @@ export default function Register() {
   useEffect(() => {
     getRoles();
   }, []);
-  const [role, setRoles] = useState([]);
+
   const getRoles = () => {
     roles()
       .then((res) => {
         console.log(res);
-        setRoles(res);
+        setRoles(res.data);
         console.log(res);
       })
       .catch((err) => {});
   };
 
-<<<<<<< HEAD
-=======
-      })
-  }
-  const onSubmit = (data) => {
-    console.log(data)
-    register(data)
-      .then((res) => {
-        console.log(res);
-        // history.push('/login')
-      });
-  }
->>>>>>> 2ba17220bdab2c57fce5eaed9ce023ef2da6d33e
   return (
     <Fragment>
       <div className="fixed-background"></div>
@@ -303,19 +297,19 @@ export default function Register() {
                         value={formik.values.role_id}
                         error={
                           formik.touched.role_id && formik.errors.role_id
-                            ? formik.errors.role_id
+                            ? formik.errors.role_id._id
                             : null
                         }
                       />
                     </FloatLabel>
 
-                    <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex justibuttonfy-content-between align-items-center">
                       <a href="/auth/register" className="btn-signUp">
                         Already Have an <br /> account?login
                       </a>
 
                       <button
-                        type="button"
+                        type="submit"
                         className="btn-shadow btn btn-primary btn-lg"
                       >
                         Sign Up

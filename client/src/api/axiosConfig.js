@@ -35,14 +35,14 @@ instance.interceptors.response.use(
     if (response.data.message) {
       toast.success(response.data.message);
     }
-    return response.data;
+    return response;
   },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("accessToken");
     }
-    if (error.response?.data?.error) {
-      toast.error(error.response.data.error);
+    if (error.response?.data?.message) {
+      toast.error(error.response.data.message);
     } else if (error.message) {
       toast.error(error.message);
     }

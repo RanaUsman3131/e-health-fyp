@@ -22,7 +22,7 @@ class AuthController extends BaseController {
         };
         res.successResponse({ data });
       } else {
-        res.errorResponse("Invalid User", 409);
+        res.errorResponse("Invalid User", 404);
       }
     } catch (e) {
       console.log(e);
@@ -43,7 +43,7 @@ class AuthController extends BaseController {
         };
 
         data = await this.create(User, data);
-        res.successResponse({ data });
+        res.successResponse({ data, message: "User Register Successfully" });
       } else {
         res.errorResponse("Email Already Exists", 409);
       }
