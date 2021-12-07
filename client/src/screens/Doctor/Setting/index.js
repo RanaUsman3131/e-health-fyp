@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Select from "../../../components/Select";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { getDepartment } from "../../../api/api";
+import { getDepartment, addDepartmentToDoc  } from "../../../api/api";
 import Container from "react-bootstrap/Container";
 import Title from "../../../components/PageTitle";
 import Card from "../../../components/Card";
@@ -28,6 +28,7 @@ const Button = styled.button`
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
+            addDepartmentToDoc(values.department._id)
             console.log("values", values.department._id)
             // createContactMutate(values);
         },

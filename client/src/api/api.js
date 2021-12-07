@@ -34,6 +34,12 @@ export async function createApp(data) {
     patient_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
   });
 }
+export async function addDepartmentToDoc(data) {
+  return await instance.post("/doctor-department", {
+    ...data,
+    doctor_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
+  });
+}
 export async function getAppointment(id) {
   let { data } = await instance.get(`/appointment/${id}`);
   return data;
