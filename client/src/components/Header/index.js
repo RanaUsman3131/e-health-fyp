@@ -6,7 +6,7 @@ import Logo from "../../assets/images/Logo.png";
 import Dropdown from "react-bootstrap/Dropdown";
 import DefaultIcon from "../../assets/images/default.png";
 import * as $ from "jquery";
-
+import { useHistory } from "react-router";
 const NavBar = styled.div`
   display: flex;
   padding: 0px;
@@ -105,6 +105,7 @@ function getWindowDimensions() {
   };
 }
 export default function Index() {
+  const history = useHistory();
   const sideBarToggle = () => {
     if ($("#aside-bar").hasClass("side-show")) {
       $("#aside-bar").removeClass("side-show");
@@ -134,6 +135,11 @@ export default function Index() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const logout = ()=>{
+    localStorage.removeItem('user_auth')
+    history.push("/")
+  }
   return (
     <Header>
       <Container fluid>
@@ -171,7 +177,7 @@ export default function Index() {
                   <Dropdown.Divider />
                   <Dropdown.Item className={"py-2"}>
                     <DropDownLink>
-                      <Link to="/auth/login">Logout</Link>
+                      <Link onClick={logout}>Logout</Link>
                     </DropDownLink>
                   </Dropdown.Item>
                 </Dropdown.Menu>

@@ -42,7 +42,12 @@ const list = [
     link: "/portal/patient/List",
     iconClass: "far fa-address-book",
   },
- 
+  {
+    id: 1,
+    name: "Setting",
+    link: "/portal/setting",
+    iconClass: "fas fa-cogs",
+  },
 ]; 
 const patientRoutes = [
   {
