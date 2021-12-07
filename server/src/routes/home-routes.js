@@ -10,6 +10,11 @@ router.get("/patients", homeController.allPatient.bind(homeController));
 
 router.post("/slot", homeController.createSlot.bind(homeController));
 
+router.post(
+  "/doctor-department",
+  homeController.updateDoctor.bind(homeController)
+);
+
 router.get("/departments", homeController.departments.bind(homeController));
 
 router.post(
