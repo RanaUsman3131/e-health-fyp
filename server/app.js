@@ -8,14 +8,18 @@ require("./src/dbConfig/connection");
 app.use(json());
 app.use(urlencoded({ extended: true }));
 
-app.use(cors({
+app.use(
+  cors({
     credentials: true,
-    origin: function(origin, callback) {
-        callback(null, true); // allow these domains
-    }
-}))
+    origin: function (origin, callback) {
+      callback(null, true); // allow these domains
+    },
+  })
+);
 app.use("/api", router);
 
-app.get("/", (req, res) => res.status(200).json({ message: "Get is running" }));
+app.get("/live-session", (req, res) =>
+  res.sendFile(__dirname + "/liveCall.html")
+);
 
 app.listen(4500, () => console.log("Server Running on Port 4500"));
