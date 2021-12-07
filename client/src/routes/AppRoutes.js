@@ -17,6 +17,7 @@ export default function AppRoutes() {
           <Route path={`${path}/dashboard`} component={Dashboard}/>
           <Route path={`${path}/patient`} component={Patient}/>
           <Route path={`${path}/appointment`} component={Appointment}/>
+          <Route path={`${path}/setting`} component={Appointment} />
 
           <Route path={`${path}/patient_dashboard`} component={PatientDashboard} />
           <Route path={`${path}/patient_appointment`} component={PatientAppointment} />
