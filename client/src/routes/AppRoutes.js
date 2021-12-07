@@ -5,6 +5,7 @@ const PatientDashboard = React.lazy(() => import("../screens/Patient/Dashboard")
 const Patient = React.lazy(() => import("../screens/Doctor/Patient/PatientRoutes"));
 const PatientAppointment = React.lazy(() => import("../screens/Patient/Appointment/AppointmentRoutes"));
 const Appointment = React.lazy(() => import("../screens/Doctor/Appointment/AppointmentRoutes"));
+const Setting = React.lazy(() => import("../screens/Doctor/Setting/index"));
 
 
 export default function AppRoutes() {
@@ -17,7 +18,7 @@ export default function AppRoutes() {
           <Route path={`${path}/dashboard`} component={Dashboard}/>
           <Route path={`${path}/patient`} component={Patient}/>
           <Route path={`${path}/appointment`} component={Appointment}/>
-          <Route path={`${path}/setting`} component={Appointment} />
+          <Route path={`${path}/setting`} component={Setting} />
 
           <Route path={`${path}/patient_dashboard`} component={PatientDashboard} />
           <Route path={`${path}/patient_appointment`} component={PatientAppointment} />

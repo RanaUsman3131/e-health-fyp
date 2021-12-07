@@ -162,6 +162,16 @@ class HomeController extends BaseController {
       res.errorResponse();
     }
   };
+  AllDepartments = async (req, res) => {
+    try {
+      let result = await this.get(Department);
+      console.log(result.length);
+      res.successResponse({ data: result });
+    } catch (e) {
+      console.log(e);
+      res.errorResponse();
+    }
+  };
 }
 
 module.exports = HomeController;

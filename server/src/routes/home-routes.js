@@ -32,4 +32,7 @@ router.get(
   homeController.getDoctorTimeSlot.bind(homeController)
 );
 
+router.get("/AllDepartments", homeController.AllDepartments.bind(homeController));
+
+
 module.exports = router;
