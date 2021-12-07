@@ -155,7 +155,6 @@ class HomeController extends BaseController {
   departments = async (req, res) => {
     try {
       let result = await this.get(Department);
-      console.log(result);
       res.successResponse({ data: result });
     } catch (e) {
       console.log(e);

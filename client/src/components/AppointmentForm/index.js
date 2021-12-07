@@ -34,14 +34,17 @@ export default function Index() {
       //   Doctor(formik.setFieldValue("department_id"));
     });
   };
+
   useEffect(() => {
     Doctor();
     Department();
   }, []);
+
   const selectAppointment = [
     { id: 1, name: "Online" },
     { id: 0, name: "In-Clinic" },
   ];
+
   const formik = useFormik({
     initialValues: {
       disease: "",
@@ -52,10 +55,10 @@ export default function Index() {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
-      createApp(values).then((res) => {
-        history.push("/list");
-      });
+      alert(JSON.stringify(values));
+      //   createApp(values).then((res) => {
+      //     history.push("/list");
+      //   });
     },
   });
 
@@ -92,17 +95,17 @@ export default function Index() {
                     label="Select Department"
                     required
                     options={department}
-                    name="appointment"
+                    name="department"
                     getOptionLabel={(option) => option.name}
                     getOptionValue={(option) => option.id}
                     onChange={(e) => {
-                      formik.setFieldValue("appointment", e);
+                      formik.setFieldValue("department", e);
                     }}
                     onBlur={formik.handleBlur}
-                    value={formik.values.appointment}
+                    value={formik.values.department}
                     error={
-                      formik.touched.appointment && formik.errors.appointment
-                        ? formik.errors.appointment.id
+                      formik.touched.department && formik.errors.department
+                        ? formik.errors.department.id
                         : null
                     }
                   />
@@ -132,7 +135,7 @@ export default function Index() {
                     label="Select Appointment"
                     required
                     options={selectAppointment}
-                    name="doctor_id"
+                    name="appointment"
                     getOptionLabel={(option) => option.name}
                     getOptionValue={(option) => option.id}
                     onChange={(e) => {
@@ -142,7 +145,7 @@ export default function Index() {
                     value={formik.values.appointment}
                     error={
                       formik.touched.appointment && formik.errors.appointment
-                        ? formik.errors.appointment.id
+                        ? formik.errors.appointment
                         : null
                     }
                   />
