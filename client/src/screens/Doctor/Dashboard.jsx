@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import Card from "../../components/Card/index"
 import Box from '@mui/material/Box';
 
@@ -6,7 +6,14 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 export default function Dashboard() {
+  const [department, setDepartment] = React.useState([]);
+  useEffect(() => {
+
+
+  }, []);
+  
   return (
+    
     <>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
