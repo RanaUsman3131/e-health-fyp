@@ -64,6 +64,25 @@ class HomeController extends BaseController {
     }
   };
 
+  updateDoctor = async (req, res) => {
+    try {
+      let { doctor_id, department_id } = req.body;
+
+      let data = await Appointment.update(
+        {
+          _id: mongoose.Types.ObjectId(doctor_id),
+        },
+        {
+          $set: { department_id: department_id },
+        }
+      );
+      res.successResponse({ data: data });
+    } catch (e) {
+      console.log(e);
+      res.errorResponse();
+    }
+  };
+
   getAppointmentsTow = async (req, res) => {
     try {
       let { id } = req.params;

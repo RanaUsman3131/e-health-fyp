@@ -6,7 +6,11 @@ const UserSchema = new mongoose.Schema(
     email: String,
     password: String,
     role_id: { type: mongoose.Schema.Types.ObjectId, ref: "Role" },
-    department_id: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
+    department_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Department",
+      default: null,
+    },
   },
   { timestamps: true }
 );
