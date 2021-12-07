@@ -15,6 +15,10 @@ router.post(
   homeController.updateDoctor.bind(homeController)
 );
 
+router.get(
+  "/get-your-department/:id",
+  homeController.getYourDepartment.bind(homeController)
+);
 router.get("/departments", homeController.departments.bind(homeController));
 
 router.post(
@@ -36,8 +40,6 @@ router.get(
   "/time-slot/:doctor_id",
   homeController.getDoctorTimeSlot.bind(homeController)
 );
-
-router.get("/AllDepartments", homeController.AllDepartments.bind(homeController));
 
 
 module.exports = router;

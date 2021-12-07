@@ -68,7 +68,7 @@ class HomeController extends BaseController {
     try {
       let { doctor_id, department_id } = req.body;
 
-      let data = await Appointment.update(
+      let data = await User.updateOne(
         {
           _id: mongoose.Types.ObjectId(doctor_id),
         },
@@ -189,11 +189,14 @@ class HomeController extends BaseController {
       res.errorResponse();
     }
   };
-  AllDepartments = async (req, res) => {
+  getYourDepartment= async (req, res) => {
     try {
-      let result = await this.get(Department);
-      console.log(result.length);
-      res.successResponse({ data: result });
+      let {id } = req.params;
+      let slots = await User.findOne({
+        _id: mongoose.Types.ObjectId(id),
+      }).populate("department_id");
+      console.log(slots);
+      res.successResponse({ data: slots });
     } catch (e) {
       console.log(e);
       res.errorResponse();

@@ -9,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Title from "../../../components/PageTitle";
 import Card from "../../../components/Card";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 export default function Setting() {
 const Button = styled.button`
   background-color: #145388;
@@ -20,7 +21,7 @@ const Button = styled.button`
   }
 `;
     const [department, setDepartment] = React.useState([]);
-
+    let history = useHistory();
     const validationSchema = Yup.object({});
     const formik = useFormik({
         initialValues: {
@@ -28,7 +29,9 @@ const Button = styled.button`
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            addDepartmentToDoc(values.department._id)
+            addDepartmentToDoc(values.department._id).then((res)=>{
+                history.push("/portal/dashboard")
+            })
             console.log("values", values.department._id)
             // createContactMutate(values);
         },

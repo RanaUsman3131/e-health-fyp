@@ -1,14 +1,23 @@
 import React, { useEffect }  from "react";
 import Card from "../../components/Card/index"
 import Box from '@mui/material/Box';
+import { getYourDepartment } from "../../api/api";
 
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
 export default function Dashboard() {
   const [department, setDepartment] = React.useState([]);
-  useEffect(() => {
+  const [dep, setYourDep] = React.useState([]);
 
+  const Department = () => {
+    getYourDepartment().then((res) => {
+      setYourDep(res.data.department_id.name);
+      //   Doctor(formik.setFieldValue("department_id"));
+    });
+  };
+  useEffect(() => {
+    Department()
 
   }, []);
   
@@ -37,7 +46,7 @@ export default function Dashboard() {
           <Grid item xs={4}>
             <Card className="d-flex">
               <Typography sx={{ fontSize: 16 }} variant="body2" color="text.secondary" gutterBottom>
-                Total Departments
+                Your Department Is <h2><b>{dep}</b></h2>
               </Typography>
 
             </Card>

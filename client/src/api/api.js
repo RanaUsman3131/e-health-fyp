@@ -36,9 +36,14 @@ export async function createApp(data) {
 }
 export async function addDepartmentToDoc(data) {
   return await instance.post("/doctor-department", {
-    ...data,
-    doctor_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
+    department_id: data,doctor_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
   });
+}
+
+
+export async function getYourDepartment() {
+  let { data } = await instance.get(`/get-your-department/${JSON.parse(localStorage.getItem("user_auth"))?.user._id}`);
+  return data;
 }
 export async function getAppointment(id) {
   let { data } = await instance.get(`/appointment/${id}`);
