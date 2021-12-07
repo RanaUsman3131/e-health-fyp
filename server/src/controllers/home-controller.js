@@ -53,7 +53,7 @@ class HomeController extends BaseController {
   getAppointments = async (req, res) => {
     try {
       let { id } = req.params;
-      console.log(id);
+
       let slots = await Appointment.find({
         patient_id: mongoose.Types.ObjectId(id),
       }).populate("doctor_id");
@@ -129,7 +129,16 @@ class HomeController extends BaseController {
 
   createAppointment = async (req, res) => {
     try {
-      let appointment = await this.create(Appointment, req.body);
+      let { phone_number, disease, doctor_id, department_id, patient_id } =
+        req.body;
+      let appointment = new Appointment({
+        phone_number,
+        disease,
+        doctor_id: doctor_id._id,
+        department_id: department_id._id,
+        patient_id: patient_id,
+      });
+      appointment.save();
       res.successResponse({ data: appointment });
     } catch (e) {
       console.log(e);

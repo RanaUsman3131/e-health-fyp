@@ -29,10 +29,14 @@ export async function getDocId(id) {
 }
 
 export async function createApp(data) {
-  return await instance.post("/appointment", data);
+  return await instance.post("/appointment", {
+    ...data,
+    patient_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
+  });
 }
 export async function getAppointment(id) {
-  return await instance.get(`/appointment/${id}`);
+  let { data } = await instance.get(`/appointment/${id}`);
+  return data;
 }
 export async function getPatients() {
   return await instance.get(`/patients`);

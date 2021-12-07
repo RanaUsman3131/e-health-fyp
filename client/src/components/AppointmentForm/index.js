@@ -16,7 +16,19 @@ import { getDoc, getDepartment, createApp } from "../../api/api";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const validationSchema = Yup.object({});
+const validationSchema = Yup.object({
+  disease: Yup.string().required("Disease is required"),
+  phone_number: Yup.string().required("Phone number is required"),
+  department_id: Yup.object().shape({
+    _id: Yup.string().required("Department is required"),
+  }),
+  doctor_id: Yup.object().shape({
+    _id: Yup.string().required("Doctor is required"),
+  }),
+  appointment: Yup.object().shape({
+    id: Yup.string().required("Appointment type is required"),
+  }),
+});
 
 export default function Index() {
   const history = useHistory();
@@ -51,14 +63,14 @@ export default function Index() {
       phone_number: "",
       department_id: "",
       doctor_id: "",
-      appointment: 0,
+      appointment: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values));
-      //   createApp(values).then((res) => {
-      //     history.push("/list");
-      //   });
+      //   alert(JSON.stringify(values));
+      createApp(values).then((res) => {
+        history.push("/list");
+      });
     },
   });
 
@@ -77,6 +89,11 @@ export default function Index() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.phone_number}
+                    error={
+                      formik.touched.phone_number && formik.errors.phone_number
+                        ? formik.errors.phone_number
+                        : null
+                    }
                   />
                 </Col>
                 <Col md={4} sm={6} xs={12}>
@@ -87,6 +104,11 @@ export default function Index() {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.disease}
+                    error={
+                      formik.touched.disease && formik.errors.disease
+                        ? formik.errors.disease
+                        : null
+                    }
                   />
                 </Col>
 
@@ -95,17 +117,18 @@ export default function Index() {
                     label="Select Department"
                     required
                     options={department}
-                    name="department"
+                    name="department_id"
                     getOptionLabel={(option) => option.name}
                     getOptionValue={(option) => option.id}
                     onChange={(e) => {
-                      formik.setFieldValue("department", e);
+                      formik.setFieldValue("department_id", e);
                     }}
                     onBlur={formik.handleBlur}
                     value={formik.values.department}
                     error={
-                      formik.touched.department && formik.errors.department
-                        ? formik.errors.department.id
+                      formik.touched.department_id &&
+                      formik.errors.department_id
+                        ? formik.errors.department_id._id
                         : null
                     }
                   />
@@ -145,7 +168,7 @@ export default function Index() {
                     value={formik.values.appointment}
                     error={
                       formik.touched.appointment && formik.errors.appointment
-                        ? formik.errors.appointment
+                        ? formik.errors.appointment.id
                         : null
                     }
                   />

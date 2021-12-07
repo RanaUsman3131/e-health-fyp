@@ -21,7 +21,7 @@ const instance = axios.create({
 instance.interceptors.request.use(
   async (config) => {
     config.headers = {
-      //   Authorization: `Bearer ${getToken()}`,
+      //  Authorization: `Bearer ${getToken()}`,
     };
     return config;
   },
