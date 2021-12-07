@@ -2,11 +2,13 @@ import React from "react";
 import Table from "../../../components/Table";
 import Container from "react-bootstrap/Container";
 import Title from "../../../components/PageTitle";
-import { getClients } from "../../../api/api";
+import { getAppointment } from "../../../api/api";
 import { useQuery } from "react-query";
 
 export default function List() {
-    const clientData = useQuery("getClients", getClients);
+
+    const id = JSON.parse(localStorage.getItem('user_auth')).user._id
+    const clientData = useQuery("getAppointment", getAppointment(id));
     const columns = React.useMemo(
         () => [
             {
@@ -36,8 +38,8 @@ export default function List() {
     return (
         <>
             <Container>
-                <Title title="Appointments" />
-                <Table btnText="Add new" link="/portal/patient/Add" columns={columns} data={data} />
+                <Title btnText="Add new" link="/portal/patient_appointment/add" title="Patient Appointments" />
+                <Table  columns={columns} data={data} />
             </Container>
         </>
     );

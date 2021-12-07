@@ -16,7 +16,28 @@ export async function register({ name, email, password, role_id }) {
     role_id,
   });
 }
+export async function getDoc() {
+  return await instance.get('/doctors');
+}
+export async function getDocId(id) {
+  return await instance.get('/doctors', { id: id });
+}
+export async function getDepartment() {
+  return await instance.get('/departments');
+}
 
+export async function createApp(data) {
+  return await instance.post('/appointment', data);
+}
+export async function getAppointment(id) {
+  return await instance.get(`/appointment/${id}`);
+}
+export async function getPatients() {
+  return await instance.get(`/patients`);
+}
+export async function getDoctors(id) {
+  return await instance.get(`/appointments/${id}`);
+}
 // //////////////////////
 export async function LLCManagement() {
   let { data } = await instance.get("/llc_managements");

@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Title from "../../../components/PageTitle";
-import Index from "../../../components/PatientForm";
+import Index from "../../../components/AppointmentForm";
 
 export default function Add() {
     return (
@@ -12,7 +12,7 @@ export default function Add() {
                     backPageText="Appointment"
                     title=" Create Appointment"
                 />
-                <Index />
+                <Index/>
             </Container>
         </>
     );

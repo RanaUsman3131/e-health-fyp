@@ -10,8 +10,8 @@ export default function PatientAppointmentRoutes() {
 
     return (
         <>
-            <Route path={`${path}`} component={List} />
-            <Route path={`${path}/Add`} component={Add} />
+            <Route path={`${path}/list`} component={List} />
+            <Route path={`${path}/add`} component={Add} />
 
         </>
     );

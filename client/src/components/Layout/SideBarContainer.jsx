@@ -54,7 +54,7 @@ const patientRoutes = [
   {
     id: 1,
     name: "Appointments",
-    link: "/portal/patient_appointment",
+    link: "/portal/patient_appointment/list",
     iconClass: "fas fa-user-friends",
   },
 
@@ -65,24 +65,26 @@ const patientRoutes = [
     iconClass: "fas fa-cogs",
   },
 ];
-
+// console.log(JSON.parse(localStorage.getItem('user_auth')).user.role_id.name)
 export default function SideBarContainer() {
   return (
     <>
+    
       <SidebarWrapper id="aside-bar" className="side-show">
         <SidebarList>
           <Ul>
             
             {
-             
-              // JSON.parse(localStorage.getItem('user_auth'))?.role_id === 1?
+           
+              JSON.parse(localStorage.getItem('user_auth')).user.role_id.name === "Patient"?
+              
                 patientRoutes.map((item, index) => (
                   <NavItem item={item} key={index}></NavItem>
             ))
-            // : 
-            //         list.map((item, index) => (
-            // <NavItem item={item} key={index}></NavItem>
-            // ))
+            : 
+                    list.map((item, index) => (
+            <NavItem item={item} key={index}></NavItem>
+            ))
             }
           </Ul>
         </SidebarList>

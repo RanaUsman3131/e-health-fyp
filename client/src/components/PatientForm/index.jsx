@@ -239,7 +239,7 @@ export default function Index({ data }) {
                 </Container>
             </Card>
 
-          c
+          
         </form>
     );
 }
