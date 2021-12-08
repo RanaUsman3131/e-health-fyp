@@ -8,43 +8,23 @@ import Col from "react-bootstrap/Col";
 import Select from "../Select";
 import Button from "../Button";
 import Heading from "../SectionHeading";
-import { useHistory } from "react-router";
+import { useHistory, useParams} from "react-router";
 import Radio from "../CheckBox";
 import styled from "styled-components";
-import { getDoc, getDepartment, createApp } from "../../api/api";
+import { updateAppointment } from "../../api/api";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-const validationSchema = Yup.object({
+// const validationSchema = Yup.object({
+//     status: Yup.required("status is required"),
+// });
 
-    department_id: Yup.object().shape({
-        _id: Yup.string().required("Department is required"),
-    }),
-  
-});
-
-export default function Index() {
+export default function EditForm() {
     const history = useHistory();
-    const [department, setDepartment] = useState([]);
+    const { id } = useParams()
 
-    const [doc, setDoc] = useState([]);
-    const Doctor = () => {
-        getDoc().then((res) => {
-            setDoc(res.data.data);
-        });
-    };
-    const Department = () => {
-        getDepartment().then((res) => {
-            setDepartment(res.data.data);
-            //   Doctor(formik.setFieldValue("department_id"));
-        });
-    };
-
-    useEffect(() => {
-        Doctor();
-        Department();
-    }, []);
+  
 
     const selectStatus = [
         { id: "pending", name: "Pending" },
@@ -55,14 +35,18 @@ export default function Index() {
 
     const formik = useFormik({
         initialValues: {
-            status: "",
+            statuse: "",
+            _id:""
            
         },
-        validationSchema: validationSchema,
+        // validationSchema: validationSchema,
         onSubmit: (values) => {
+            console.log(values.status.name)
             //   alert(JSON.stringify(values));
-            createApp(values).then((res) => {
-                history.push("/list");
+            values._id = id
+            values.status=values.status.id
+            updateAppointment(values).then((res) => {
+                history.push("/portal/appointment");
             });
         },
     });
@@ -79,7 +63,7 @@ export default function Index() {
                                         label="Change Status"
                                         required
                                         options={selectStatus}
-                                        name="status"
+                                        name="statuse"
                                         getOptionLabel={(option) => option.name}
                                         getOptionValue={(option) => option.id}
                                         onChange={(e) => {

@@ -52,6 +52,7 @@ export async function getAppointment(id) {
   let { data } = await instance.get(`/appointment/${id}`);
   return data;
 }
+
 export async function getYourAppointment(id) {
   return await instance.get(
     `/get-your-appointments/${
@@ -110,11 +111,17 @@ export async function statesByCountryId({ queryKey: [_, _data] }) {
   let { data } = await instance.get(`/states?country_id=${_data.countryId}`);
   return data;
 }
+export async function updateAppointment(_data) {
+  let { data } = await instance.post(`/appointment-update`, _data);
+  return data;
+}
+
 
 export async function createClient(_data) {
   let { data } = await instance.post(`/clients`, _data);
   return data;
 }
+
 
 export async function getClients() {
   let { data } = await instance.get(`/clients`);

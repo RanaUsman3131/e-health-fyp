@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "react-bootstrap/Container";
 import Title from "../../../components/PageTitle";
-import Index from "../../../components/AppointmentForm";
+import EditForm from "../../../components/AppointmentForm/Edit";
 
 export default function Edit() {
     return (
@@ -10,9 +10,9 @@ export default function Edit() {
                 <Title
                     backlink="/portal/appointment"
                     backPageText="Appointment"
-                    title=" Create Appointment"
+                    title="Change Status Of Appointment"
                 />
-                <Index />
+                <EditForm />
             </Container>
         </>
     );

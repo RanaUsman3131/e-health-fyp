@@ -42,7 +42,7 @@ class HomeController extends BaseController {
   updateAppointment = async (req, res) => {
     try {
       let { status, _id } = req.body;
-      let data = await User.updateOne(
+      let data = await Appointment.updateOne(
         {
           _id: mongoose.Types.ObjectId(_id),
         },
@@ -50,8 +50,8 @@ class HomeController extends BaseController {
           $set: { status: status },
         }
       );
-      let slots = await this.get(Availability, { doctor_id });
-      res.successResponse({ data: slots });
+      // let slots = await this.get(Availability, { doctor_id });
+      res.successResponse({ data: data });
     } catch (e) {
       console.log(e);
       res.errorResponse();
