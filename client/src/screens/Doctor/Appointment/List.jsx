@@ -46,6 +46,14 @@ export default function List() {
             {
                 Header: "Status",
                 accessor: "status",
+                Cell: ({ row }) => {
+                    return (
+                        row.original.status == "pending" ? <span style={{ color: "red" }}>Pending</span> :
+                            row.original.status == "approved" ? <span style={{color:"blue"}}>Approved</span> :
+                                row.original.status == "complete" ? <span style={{ color: "green" }}>Complete</span>:null
+                        
+                    );
+                },
             },
             {
                 Header: "Actions",

@@ -12,7 +12,7 @@ export default function AppointmentRoutes() {
         <>
             <React.Suspense fallback={"Loading"}>
                 <Switch>
-                    <Route path={`${path}`} component={List} />
+                    <Route exact path={`${path}`} component={List} />
                     <Route path={`${path}/add`} component={Add} />
                     <Route path={`${path}/edit/:id`} component={Edit} />
 
