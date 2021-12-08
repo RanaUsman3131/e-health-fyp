@@ -42,13 +42,28 @@ export async function addDepartmentToDoc(data) {
 
 
 export async function getYourDepartment() {
-  let { data } = await instance.get(`/get-your-department/${JSON.parse(localStorage.getItem("user_auth"))?.user._id}`);
-  return data;
+  return await instance.get(`/get-your-department/${JSON.parse(localStorage.getItem("user_auth"))?.user._id}`);
+   
 }
 export async function getAppointment(id) {
   let { data } = await instance.get(`/appointment/${id}`);
   return data;
 }
+export async function getYourAppointment(id) {
+  return await instance.get(`/get-your-appointments/${JSON.parse(localStorage.getItem("user_auth"))?.user._id}`);
+   
+}
+
+export async function getAppointmentsTow(id) {
+  let { data } = await instance.get(`/appointments/${id}`);
+  return data;
+}
+export async function getYourPatients(id) {
+  let { data } = await instance.get(`/get-your-patient/${id}`);
+  return data;
+}
+
+
 export async function getPatients() {
   return await instance.get(`/patients`);
 }

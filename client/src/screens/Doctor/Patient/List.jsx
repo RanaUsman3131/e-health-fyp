@@ -1,21 +1,33 @@
-import React from "react";
+import React,{ useEffect} from "react";
 import Table from "../../../components/Table";
 import Container from "react-bootstrap/Container";
 import Title from "../../../components/PageTitle";
-import { getContacts } from "../../../api/api";
+import { getYourPatients, getYourDepartment} from "../../../api/api";
 import { useQuery } from "react-query";
 import { Link, useRouteMatch } from "react-router-dom";
 
 export default function List() {
     let { url } = useRouteMatch();
-    const contactData = useQuery("getContacts", getContacts);
-    console.log(contactData);
+    const id = JSON.parse(localStorage.getItem("user_auth")).user._id;
+    const contactData = useQuery("getYourPatients", ()=> getYourPatients(id));
+    const [dep, setYourDep] = React.useState([]);
+
+    const Department = () => {
+        getYourDepartment().then((res) => {
+            setYourDep(res.data?.department_id?.name);
+            //   Doctor(formik.setFieldValue("department_id"));
+        });
+    };
+    useEffect(() => {
+        Department()
+
+    }, []);
     const columns = React.useMemo(
         () => [
           
             {
                 Header: "Name",
-                accessor: "ma,e",
+                accessor: "patient_id.name",
                 // Cell: ({ row }) => {
                 //     return (
                 //         <Link to={`${url + "/details/" + row.original._id}/detail`}>
@@ -27,6 +39,12 @@ export default function List() {
             {
                 Header: "Department",
                 accessor: "department",
+                   Cell: ({ row }) => {
+                    return (
+                        dep
+
+                    );
+                },
             },
             {
                 Header: "Disease",
@@ -36,12 +54,12 @@ export default function List() {
             
             {
                 Header: "Cell Phone",
-                accessor: "cellPhone",
+                accessor: "phone_number",
             },
         ],
         []
-    );
-    const data = React.useMemo(() => contactData.data || [], [contactData.data]);
+    ); 
+    const data = React.useMemo(() => contactData?.data?.data || [], [contactData?.data?.data]);
     return (
         <>
             <Container>

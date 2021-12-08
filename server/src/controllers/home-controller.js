@@ -63,7 +63,24 @@ class HomeController extends BaseController {
       res.errorResponse();
     }
   };
+  getYoursAppointments = async (req, res) => {
+    try {
+      let { id } = req.params;
 
+      let slots = await Appointment.find({
+        patient_id: mongoose.Types.ObjectId(id),
+      }).populate("doctor_id");
+
+      let pending = await Appointment.find({
+        patient_id: mongoose.Types.ObjectId(id),
+        status: "pending",
+      }).populate("doctor_id");
+      res.json({ data: slots.length, pending: pending.length});
+    } catch (e) {
+      console.log(e);
+      res.errorResponse();
+    }
+  };
   updateDoctor = async (req, res) => {
     try {
       let { doctor_id, department_id } = req.body;
@@ -195,6 +212,28 @@ class HomeController extends BaseController {
       let slots = await User.findOne({
         _id: mongoose.Types.ObjectId(id),
       }).populate("department_id");
+      
+      let appointment = await Appointment.find({
+        doctor_id: mongoose.Types.ObjectId(id),
+      }).populate("patient_id");
+      
+      // let patient = await Appointment.find({
+      //   doctor_id: mongoose.Types.ObjectId(id),
+      // }).populate("patient_id");
+
+      console.log(appointment);
+      res.json({ data: slots, appointment: appointment.length});
+    } catch (e) {
+      console.log(e);
+      res.errorResponse();
+    }
+  };
+  getYourPatients = async (req, res) => {
+    try {
+      let { id } = req.params;
+      let slots = await Appointment.find({
+        doctor_id: mongoose.Types.ObjectId(id),
+      }).populate("patient_id");
       console.log(slots);
       res.successResponse({ data: slots });
     } catch (e) {

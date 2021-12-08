@@ -19,12 +19,22 @@ router.get(
   "/get-your-department/:id",
   homeController.getYourDepartment.bind(homeController)
 );
+router.get(
+  "/get-your-appointments/:id",
+  homeController.getYoursAppointments.bind(homeController)
+);
+
 router.get("/departments", homeController.departments.bind(homeController));
 
 router.post(
   "/appointment",
   homeController.createAppointment.bind(homeController)
 );
+router.get(
+  "/get-your-patient/:id",
+  homeController.getYourPatients.bind(homeController)
+);
+
 
 router.get(
   "/appointment/:id",

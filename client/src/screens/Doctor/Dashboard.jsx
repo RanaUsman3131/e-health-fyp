@@ -8,11 +8,19 @@ import Typography from '@mui/material/Typography';
 
 export default function Dashboard() {
   const [department, setDepartment] = React.useState([]);
-  const [dep, setYourDep] = React.useState([]);
+  const [dep, setYourDep] = React.useState("");
+  const [totalApp, setTotalApp] = React.useState("");
+  const [totalPatients, setTotalPatients] = React.useState("");
 
+  
   const Department = () => {
     getYourDepartment().then((res) => {
-      setYourDep(res.data.department_id.name);
+      console.log("appointment",res)
+      setYourDep(res.data.data.department_id.name);
+      setTotalApp(res.data.appointment)
+      setTotalPatients(res.data.setTotalPatients)
+
+      
       //   Doctor(formik.setFieldValue("department_id"));
     });
   };
@@ -30,7 +38,8 @@ export default function Dashboard() {
           <Grid item xs={4}>
             <Card className="d-flex">
               <Typography sx={{ fontSize: 16 }} variant="body1" color="text.secondary" gutterBottom>
-                Total Patients
+                Total Patients<h2><b>{totalPatients}</b></h2>
+                
               </Typography>
           
             </Card>
@@ -38,7 +47,7 @@ export default function Dashboard() {
           <Grid item xs={4}>
             <Card className="d-flex">
               <Typography sx={{ fontSize: 16 }} variant="body1" color="text.secondary" gutterBottom>
-                Total Appointments
+                Total Appointments<h2><b>{totalApp}</b></h2>
               </Typography>
 
             </Card>
