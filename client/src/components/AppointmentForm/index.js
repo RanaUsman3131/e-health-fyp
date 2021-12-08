@@ -18,6 +18,9 @@ import * as Yup from "yup";
 
 const validationSchema = Yup.object({
   disease: Yup.string().required("Disease is required"),
+  date: Yup.string().required("Date is required"),
+  time: Yup.string().required("time is required"),
+
   phone_number: Yup.string().required("Phone number is required"),
   department_id: Yup.object().shape({
     _id: Yup.string().required("Department is required"),
@@ -35,8 +38,9 @@ export default function Index() {
   const [department, setDepartment] = useState([]);
 
   const [doc, setDoc] = useState([]);
-  const Doctor = () => {
-    getDoc().then((res) => {
+
+  const getDoctor = (_id) => {
+    getDoc(_id).then((res) => {
       setDoc(res.data.data);
     });
   };
@@ -48,7 +52,6 @@ export default function Index() {
   };
 
   useEffect(() => {
-    Doctor();
     Department();
   }, []);
 
@@ -60,6 +63,8 @@ export default function Index() {
   const formik = useFormik({
     initialValues: {
       disease: "",
+      time: "",
+      date: "",
       phone_number: "",
       department_id: "",
       doctor_id: "",
@@ -119,9 +124,10 @@ export default function Index() {
                     options={department}
                     name="department_id"
                     getOptionLabel={(option) => option.name}
-                    getOptionValue={(option) => option.id}
+                    getOptionValue={(option) => option._id}
                     onChange={(e) => {
                       formik.setFieldValue("department_id", e);
+                      getDoctor(e._id);
                     }}
                     onBlur={formik.handleBlur}
                     value={formik.values.department}
@@ -153,6 +159,41 @@ export default function Index() {
                     }
                   />
                 </Col>
+
+                <Col md={4} sm={6} xs={12}>
+                  <Input
+                    label="Date"
+                    required
+                    name="date"
+                    type="date"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.date}
+                    error={
+                      formik.touched.date && formik.errors.date
+                        ? formik.errors.date
+                        : null
+                    }
+                  />
+                </Col>
+
+                <Col md={4} sm={6} xs={12}>
+                  <Input
+                    label="Time"
+                    required
+                    name="time"
+                    type="time"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.time}
+                    error={
+                      formik.touched.time && formik.errors.time
+                        ? formik.errors.time
+                        : null
+                    }
+                  />
+                </Col>
+
                 <Col md={4} sm={6} xs={12}>
                   <Select
                     label="Select Appointment"

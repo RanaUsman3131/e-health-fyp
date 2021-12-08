@@ -30,11 +30,16 @@ router.post(
   "/appointment",
   homeController.createAppointment.bind(homeController)
 );
+
+router.post(
+  "/appointment-update",
+  homeController.updateAppointment.bind(homeController)
+);
+
 router.get(
   "/get-your-patient/:id",
   homeController.getYourPatients.bind(homeController)
 );
-
 
 router.get(
   "/appointment/:id",
@@ -50,6 +55,5 @@ router.get(
   "/time-slot/:doctor_id",
   homeController.getDoctorTimeSlot.bind(homeController)
 );
-
 
 module.exports = router;
