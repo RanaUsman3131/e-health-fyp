@@ -39,6 +39,24 @@ class HomeController extends BaseController {
       res.errorResponse();
     }
   };
+  updateAppointment = async (req, res) => {
+    try {
+      let { status, _id } = req.body;
+      let data = await User.updateOne(
+        {
+          _id: mongoose.Types.ObjectId(_id),
+        },
+        {
+          $set: { status: status },
+        }
+      );
+      let slots = await this.get(Availability, { doctor_id });
+      res.successResponse({ data: slots });
+    } catch (e) {
+      console.log(e);
+      res.errorResponse();
+    }
+  };
   getDoctorTimeSlot = async (req, res) => {
     try {
       let { doctor_id } = req.params;
@@ -75,7 +93,7 @@ class HomeController extends BaseController {
         patient_id: mongoose.Types.ObjectId(id),
         status: "pending",
       }).populate("doctor_id");
-      res.json({ data: slots.length, pending: pending.length});
+      res.json({ data: slots.length, pending: pending.length });
     } catch (e) {
       console.log(e);
       res.errorResponse();
@@ -140,6 +158,7 @@ class HomeController extends BaseController {
   };
   allDoctors = async (req, res) => {
     try {
+      let { dep_id } = req.query;
       let result = await User.aggregate([
         {
           $lookup: {
@@ -152,6 +171,7 @@ class HomeController extends BaseController {
         { $unwind: "$roles" },
         {
           $match: {
+            department_id: mongoose.Types.ObjectId(dep_id),
             "roles.name": "Doctor",
           },
         },
@@ -165,11 +185,20 @@ class HomeController extends BaseController {
 
   createAppointment = async (req, res) => {
     try {
-      let { phone_number, disease, doctor_id, department_id, patient_id } =
-        req.body;
+      let {
+        phone_number,
+        disease,
+        time,
+        date,
+        doctor_id,
+        department_id,
+        patient_id,
+      } = req.body;
       let appointment = new Appointment({
         phone_number,
         disease,
+        time,
+        date,
         doctor_id: doctor_id._id,
         department_id: department_id._id,
         patient_id: patient_id,
@@ -206,23 +235,23 @@ class HomeController extends BaseController {
       res.errorResponse();
     }
   };
-  getYourDepartment= async (req, res) => {
+  getYourDepartment = async (req, res) => {
     try {
-      let {id } = req.params;
+      let { id } = req.params;
       let slots = await User.findOne({
         _id: mongoose.Types.ObjectId(id),
       }).populate("department_id");
-      
+
       let appointment = await Appointment.find({
         doctor_id: mongoose.Types.ObjectId(id),
       }).populate("patient_id");
-      
+
       // let patient = await Appointment.find({
       //   doctor_id: mongoose.Types.ObjectId(id),
       // }).populate("patient_id");
 
       console.log(appointment);
-      res.json({ data: slots, appointment: appointment.length});
+      res.json({ data: slots, appointment: appointment.length });
     } catch (e) {
       console.log(e);
       res.errorResponse();

@@ -16,8 +16,8 @@ export async function register({ name, email, password, role_id }) {
     role_id,
   });
 }
-export async function getDoc() {
-  return await instance.get("/doctors");
+export async function getDoc(_id) {
+  return await instance.get("/doctors?dep_id=" + `${_id}`);
 }
 
 export async function getDepartment() {
@@ -36,22 +36,28 @@ export async function createApp(data) {
 }
 export async function addDepartmentToDoc(data) {
   return await instance.post("/doctor-department", {
-    department_id: data,doctor_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
+    department_id: data,
+    doctor_id: JSON.parse(localStorage.getItem("user_auth"))?.user._id,
   });
 }
 
-
 export async function getYourDepartment() {
-  return await instance.get(`/get-your-department/${JSON.parse(localStorage.getItem("user_auth"))?.user._id}`);
-   
+  return await instance.get(
+    `/get-your-department/${
+      JSON.parse(localStorage.getItem("user_auth"))?.user._id
+    }`
+  );
 }
 export async function getAppointment(id) {
   let { data } = await instance.get(`/appointment/${id}`);
   return data;
 }
 export async function getYourAppointment(id) {
-  return await instance.get(`/get-your-appointments/${JSON.parse(localStorage.getItem("user_auth"))?.user._id}`);
-   
+  return await instance.get(
+    `/get-your-appointments/${
+      JSON.parse(localStorage.getItem("user_auth"))?.user._id
+    }`
+  );
 }
 
 export async function getAppointmentsTow(id) {
@@ -62,7 +68,6 @@ export async function getYourPatients(id) {
   let { data } = await instance.get(`/get-your-patient/${id}`);
   return data;
 }
-
 
 export async function getPatients() {
   return await instance.get(`/patients`);
