@@ -188,22 +188,32 @@ class HomeController extends BaseController {
       let {
         phone_number,
         disease,
+        appointment,
         time,
         date,
         doctor_id,
         department_id,
         patient_id,
       } = req.body;
-      let appointment = new Appointment({
+
+      let link = null;
+      if (appointment.id) {
+        const { v4: uuidv4 } = require("uuid");
+        link = `/live-session?code=${uuidv4()}`;
+      }
+
+      let _appointment = new Appointment({
         phone_number,
         disease,
         time,
+
         date,
+        link: link,
         doctor_id: doctor_id._id,
         department_id: department_id._id,
         patient_id: patient_id,
       });
-      appointment.save();
+      await _appointment.save();
       res.successResponse({ data: appointment });
     } catch (e) {
       console.log(e);

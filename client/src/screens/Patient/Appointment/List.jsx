@@ -23,6 +23,14 @@ export default function List() {
         accessor: "disease",
       },
       {
+        Header: "Date ",
+        accessor: "date",
+      },
+      {
+        Header: "Time",
+        accessor: "time",
+      },
+      {
         Header: "Doctor Name",
         accessor: "doctor_id.name",
       },

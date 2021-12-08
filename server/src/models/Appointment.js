@@ -11,6 +11,7 @@ const AppointmentSchema = new mongoose.Schema(
     disease: String,
     time: String,
     date: String,
+    link: String,
     doctor_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     department_id: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
     patient_id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
