@@ -74,7 +74,7 @@ export default function Index() {
     onSubmit: (values) => {
       //   alert(JSON.stringify(values));
       createApp(values).then((res) => {
-        history.push("/list");
+        history.push("/portal/patient_appointment/list");
       });
     },
   });

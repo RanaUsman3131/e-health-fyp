@@ -15,8 +15,8 @@ export default function List() {
         accessor: "_id", // accessor is the "key" in the data
       },
       {
-        Header: "Appointment Day",
-        accessor: "booking_date",
+        Header: "Doctor Name",
+        accessor: "doctor_id.name",
       },
       {
         Header: "Disease",
@@ -31,9 +31,21 @@ export default function List() {
         accessor: "time",
       },
       {
-        Header: "Doctor Name",
-        accessor: "doctor_id.name",
+        Header: "Link",
+        accessor: "link",
+        Cell: ({ row }) => {
+          if (row.original.link) {
+            return (
+              <a href={row.original.link} target="_blank" rel="noreferrer">
+                Online link
+              </a>
+            );
+          } else {
+            return "";
+          }
+        },
       },
+
       {
         Header: "Status",
         accessor: "status",
