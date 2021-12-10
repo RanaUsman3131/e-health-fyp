@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Switch, Route } from 'react-router-dom';
 import AuthRoutes from "./AuthRoutes";
 import Main from "../screens/Main";
 import Home from "../screens/Home/Home";
@@ -13,12 +13,12 @@ export default function Index() {
       <BrowserRouter>
       <React.Suspense fallback={<h1>Loading...</h1>}>
         <Switch>
-          <AuthRoutes path={`/login`} component={Login} />
+          <AuthRoutes exact path={`/login`} component={Login} />
           <AuthRoutes path={`/register`} component={Register} />
 
           <ProtectedRoute path="/portal" component={Main} />
-
-          <Redirect from="*" to="/login" />
+            <Route render={() => <Redirect to="/login" />} />
+          {/* <Redirect from="/" to="/login" /> */}
         </Switch>
 
       </React.Suspense>

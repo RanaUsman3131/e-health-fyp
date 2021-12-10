@@ -138,7 +138,7 @@ export default function Index() {
 
   const logout = ()=>{
     localStorage.removeItem('user_auth')
-    history.push("/")
+    history.push("/login")
   }
   return (
     <Header>
@@ -161,16 +161,16 @@ export default function Index() {
               <Dropdown>
                 <Dropdown.Toggle as={"span"} id="dropdown-basic">
                   <DefaultIconContainer>
-                    <UserName> Drea</UserName>
+                    <UserName> { JSON.parse(localStorage.getItem('user_auth')).user?.role_id?.name}</UserName>
 
                     <DefaultIconImg src={DefaultIcon} alt="img" />
                   </DefaultIconContainer>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu align={"start"}>
-                  <Dropdown.Item className={"py-2"} href="#/action-2">
+                  {/* <Dropdown.Item className={"py-2"} href="#/action-2">
                     <DropDownLink>Profile</DropDownLink>
-                  </Dropdown.Item>
+                  </Dropdown.Item> */}
                   {/* <Dropdown.Item className={"py-2"} href="#/action-3">
                     <DropDownLink>What's New</DropDownLink>
                   </Dropdown.Item> */}

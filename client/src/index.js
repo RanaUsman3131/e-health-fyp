@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 
 import reportWebVitals from "./reportWebVitals";
 import { QueryClient, QueryClientProvider } from "react-query";
+import ErrorBoundary from "../src/components/ErrorBoundries"
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,7 +21,10 @@ const queryClient = new QueryClient({
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
       <ToastContainer
         position="top-right"
         autoClose={5000}
